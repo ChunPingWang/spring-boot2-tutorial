@@ -1,6 +1,6 @@
-# MES Spring Boot 2 教學專案
+# Spring Boot 2 教學專案
 
-以製造業 **MES（Manufacturing Execution System，製造執行系統）** 為領域範例，透過 Maven 多模組架構，漸進式展示 **DDD 戰術設計**、**六角形架構**、**CQRS** 與 **SOLID 原則**。
+以製造業製造執行系統（Manufacturing Execution System）為領域範例，透過 Maven 多模組架構，漸進式展示 **DDD 戰術設計**、**六角形架構**、**CQRS** 與 **SOLID 原則**。
 
 ## 技術棧
 
@@ -62,7 +62,7 @@ mvn spring-boot:run -pl mes-kafka
 
 ## 模組詳解
 
-### mes-common — DDD 共用基礎（Shared Kernel）
+### Common — DDD 共用基礎（Shared Kernel）
 
 所有模組共用的 DDD 與 CQRS 基礎類別，**不依賴任何 Spring 框架**，是純 Java 的領域基礎設施。
 
@@ -90,7 +90,7 @@ com.mes.common/
 
 ---
 
-### Module 1: mes-boot-basics — 工單管理
+### Module 1: Boot Basics — 工單管理
 
 > **領域**: WorkOrder（工單）— 製造業最基礎的作業單位
 
@@ -160,7 +160,7 @@ public class Quantity extends BaseValueObject {
 
 ---
 
-### Module 2: mes-web-api — 生產追蹤
+### Module 2: Web API — 生產追蹤
 
 > **領域**: ProductionRecord（生產紀錄）— 追蹤每條產線的即時生產狀況
 
@@ -227,7 +227,7 @@ GET    /api/v1/productions/summary?lineId=  產線摘要
 
 ---
 
-### Module 3: mes-mybatis — 設備管理
+### Module 3: MyBatis — 設備管理
 
 > **領域**: Equipment（設備）含 MaintenanceRecord（保養紀錄）— 展示聚合根內包含子 Entity
 
@@ -313,7 +313,7 @@ public class ListEquipmentByStatusQueryHandler
 
 ---
 
-### Module 4: mes-kafka — 品質檢驗
+### Module 4: Kafka — 品質檢驗
 
 > **領域**: InspectionOrder（品檢單）含 InspectionResult（檢驗結果）— 展示事件驅動架構與跨 Bounded Context 整合
 
@@ -329,10 +329,10 @@ public class ListEquipmentByStatusQueryHandler
 
 ```
   ┌──────────────┐         Kafka Topic              ┌──────────────┐
-  │ 生產模組      │    mes.production.events         │ 品檢模組      │
-  │ (mes-web-api)│ ─── ProductionCompleted ──────► │ (mes-kafka)  │
+  │ 生產模組      │    production.events             │ 品檢模組      │
+  │ (web-api)    │ ─── ProductionCompleted ──────► │ (kafka)      │
   │              │                                  │              │
-  │              │    mes.quality.events            │              │
+  │              │    quality.events                │              │
   │              │ ◄── QualityAlert ──────────────  │              │
   └──────────────┘                                  └──────────────┘
 ```
@@ -463,11 +463,11 @@ com.mes.{module}.{context}/
 
 | 模組 | 測試數 |
 |---|---|
-| mes-common | 16 |
-| mes-boot-basics | 79 |
-| mes-web-api | 62 |
-| mes-mybatis | 54 |
-| mes-kafka | 58 |
+| common | 16 |
+| boot-basics | 79 |
+| web-api | 62 |
+| mybatis | 54 |
+| kafka | 58 |
 | **總計** | **269** |
 
 ---
@@ -477,14 +477,14 @@ com.mes.{module}.{context}/
 ```
 Step 1                Step 2                Step 3                Step 4
 ┌──────────┐         ┌──────────┐         ┌──────────┐         ┌──────────┐
-│mes-common│  ──►    │mes-boot  │  ──►    │mes-web   │  ──►    │mes-kafka │
-│          │         │-basics   │         │-api      │         │          │
+│ common   │  ──►    │ boot     │  ──►    │ web-api  │  ──►    │ kafka    │
+│          │         │ -basics  │         │          │         │          │
 │ DDD 基礎  │         │ Spring   │         │ REST +   │         │ 事件驅動  │
 │ 類別      │         │ Boot 基礎 │         │ CQRS     │         │ Kafka    │
 └──────────┘         └──────────┘         └──────────┘         └──────────┘
                                                 │
                                           ┌─────▼─────┐
-                                          │mes-mybatis │
+                                          │ mybatis    │
                                           │ 持久層整合   │
                                           └───────────┘
 ```
