@@ -1,0 +1,27 @@
+server:
+  port: 8088
+
+spring:
+  application:
+    name: mes-testing
+  redis:
+    host: localhost
+    port: 6379
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,beans,appinfo,metrics,env
+  endpoint:
+    health:
+      show-details: always
+  health:
+    defaults:
+      enabled: true
+
+logging:
+  level:
+    com.mes.testing: DEBUG
+    org.springframework.web: INFO
+    org.springframework.security: DEBUG

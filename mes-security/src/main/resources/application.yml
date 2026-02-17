@@ -1,0 +1,16 @@
+server:
+  port: 8084
+
+spring:
+  application:
+    name: mes-security
+
+mes:
+  security:
+    jwt:
+      secret: mySecretKeyForTeachingPurposesMustBeAtLeast256BitsLong!!!
+      expiration-ms: 3600000
+
+logging:
+  level:
+    com.mes.security: DEBUG

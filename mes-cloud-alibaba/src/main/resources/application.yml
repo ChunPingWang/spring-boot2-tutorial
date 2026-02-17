@@ -1,0 +1,30 @@
+server:
+  port: 8086
+
+spring:
+  application:
+    name: mes-cloud-alibaba
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+        enabled: true
+      config:
+        server-addr: localhost:8848
+        file-extension: yaml
+        enabled: true
+    sentinel:
+      transport:
+        dashboard: localhost:8080
+        port: 8719
+      enabled: true
+
+mes:
+  material:
+    minimum-stock-threshold: 10
+    reorder-multiplier: 2
+
+logging:
+  level:
+    com.mes.cloud: DEBUG
+    com.alibaba.cloud: INFO

@@ -1,0 +1,26 @@
+server:
+  port: 8085
+
+spring:
+  application:
+    name: mes-redis
+  redis:
+    host: localhost
+    port: 6379
+    timeout: 3000ms
+    lettuce:
+      pool:
+        max-active: 8
+        max-idle: 8
+        min-idle: 2
+  cache:
+    type: redis
+    redis:
+      time-to-live: 1800000
+      key-prefix: "mes:"
+      use-key-prefix: true
+      cache-null-values: false
+
+logging:
+  level:
+    com.mes.redis: DEBUG

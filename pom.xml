@@ -28,6 +28,10 @@
         <module>mes-gateway</module>
         <module>mes-redis</module>
         <module>mes-cloud-alibaba</module>
+        <module>mes-jpa</module>
+        <module>mes-testing</module>
+        <module>mes-batch</module>
+        <module>mes-actuator</module>
     </modules>
 
     <properties>
