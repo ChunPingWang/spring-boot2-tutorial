@@ -62,7 +62,10 @@ class ProductRepositoryTest {
         lowStock.setMinimumStock(10);
         productRepository.save(lowStock);
 
-        productRepository.save(new Product("P-007", "Normal Stock", "Electronics", "PCS", 100.0));
+        Product normalStock = new Product("P-007", "Normal Stock", "Electronics", "PCS", 100.0);
+        normalStock.updateStock(50);
+        normalStock.setMinimumStock(10);
+        productRepository.save(normalStock);
 
         List<Product> lowStockProducts = productRepository.findLowStockProducts();
 
