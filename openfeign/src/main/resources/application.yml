@@ -1,0 +1,14 @@
+server:
+  port: 8093
+
+spring:
+  application:
+    name: mes-openfeign
+
+feign:
+  client:
+    url: http://localhost:8080
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000

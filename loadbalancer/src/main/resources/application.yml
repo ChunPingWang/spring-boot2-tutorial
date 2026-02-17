@@ -1,0 +1,10 @@
+server:
+  port: 8094
+
+spring:
+  application:
+    name: mes-loadbalancer
+
+logging:
+  level:
+    com.mes.loadbalancer: DEBUG

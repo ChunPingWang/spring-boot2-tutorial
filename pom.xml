@@ -35,6 +35,9 @@
         <module>aop</module>
         <module>eureka</module>
         <module>hystrix</module>
+        <module>openfeign</module>
+        <module>loadbalancer</module>
+        <module>sleuth</module>
     </modules>
 
     <properties>
